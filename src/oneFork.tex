@@ -1,0 +1,50 @@
+ss{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+%listing package
+\begin{document}
+
+\tikzstyle{pid} = [rectangle,rounded corners, minimum width=3cm, minimum height=1cm, text width=3cm,text centered, draw=black]
+\tikzstyle{action} = [rectangle,minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{comment} = [rectangle,rounded corners,text centered,draw=black, minimum height=0.8cm,fill=yellow!10]
+\tikzstyle{state} = [circle, minimum size=1cm, thick ,draw=black,text centered]
+\tikzstyle{arrow} = [thick,->,>=stealth,scale=2]
+
+\begin{tikzpicture}[
+    node distance=2cm,
+    level distance=2.5cm,
+    level 1/.style = {sibling distance=6cm},
+    level 2/.style = {sibling distance=6cm}
+]
+
+\node(start)[pid, fill=red!10]{Parent};
+\node(fork1)[action, below of=start]{int PID = fork()}
+child{
+    node(child1)[pid, fill=blue!10]{Child\\ $PID==0$}
+    child{
+        node(exit1)[state]{exit}
+    }
+}
+child{
+        node(parent1)[pid, fill=green!10]{Parent\\ $PID>0$}
+        child{ 
+            node(wait)[state]{wait()}
+            child{
+                node(blank1){}
+            }
+        }
+    }
+;
+
+\draw [arrow] (start) -- (fork1);
+\draw [arrow] (fork1) -- (child1);
+\draw [arrow] (fork1) -- (parent1);
+\draw [arrow] (child1) -- node[anchor=east,comment]{execvp(arg[0],argv)} (exit1);
+\draw [arrow] (parent1) -- (wait);
+\draw [arrow] (exit1) -- node[anchor=south,comment]{zombie process} (wait);
+\draw [arrow] (wait) -- node[anchor=east,comment]{shell process} (blank1);
+
+\end{tikzpicture}
+
+\end{document}
