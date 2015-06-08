@@ -1,0 +1,127 @@
+\documentclass[8pt]{extarticle}
+\usepackage{array,multirow}
+\usepackage[normalem]{ulem}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{arrows, decorations.markings}
+\usetikzlibrary{positioning}
+
+\tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
+  1 with {\arrow[semithick]{open triangle 60}}},
+  double distance=1.4pt, shorten >= 5.5pt,
+  preaction = {decorate},
+  postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
+\tikzstyle{innerWhite} = [semithick, white,line width=1.4pt, shorten >= 4.5pt]
+
+\begin{document}
+\hspace{-4cm}
+\begin{tikzpicture}
+	\tikzset{
+		myarrow/.style={->,>=latex', shorten >=1pt, thick}
+	}
+	\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1}]
+
+	\node(a) {
+		\begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
+			$\rightarrow$ & in & \\\cline{2-2}
+			& out & $\rightarrow$ \\\cline{2-2}
+			& err & $\rightarrow$  \\\cline{2-2}
+			$\rightarrow$&fd[0]&$\rightarrow$\\\cline{2-2}
+			$\rightarrow$&fd[1]&$\rightarrow$\\\cline{2-2}
+		\end{tabular}
+	};
+	
+	\node[below= 1cm of a.south] (b) {
+		\begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
+			$\rightarrow$ & in & \\\cline{2-2}
+			pipe $\rightarrow$&\sout{out} fd[0]&$\rightarrow$ pipe \\\cline{2-2}
+			& err &$\rightarrow$ \\\cline{2-2}
+			$\rightarrow$&fd[0]&$\rightarrow$ \\\cline{2-2}
+			$\rightarrow$&fd[1]&$\rightarrow$ \\\cline{2-2}
+		\end{tabular}
+	};
+	\node[below= 1cm of b.south] (c) {
+		\begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
+			$\rightarrow$& in & \\\cline{2-2}
+			pipe $\rightarrow$& fd[0] &$\rightarrow$ pipe \\\cline{2-2}
+			& err & $\rightarrow$ \\\cline{2-2}
+			$\rightarrow$&fd[0]&$\rightarrow$ \\\cline{2-2}
+			$\rightarrow$&fd[1]&$\rightarrow$ \\\cline{2-2}
+		\end{tabular}
+	};
+	\end{scope}
+
+	\node[draw,left= .25cm of a.west] (w) {
+		\begin{lstlisting}
+int fd[2];
+pipe(fd);
+		\end{lstlisting}
+		};
+	\node[draw,left= .25cm of b.west] (x)  {
+		\begin{lstlisting} 
+dup2(fd[0],1}; 
+		\end{lstlisting}
+		};
+	\node[draw,left= .25cm of c.west] (y) {Final Result};
+
+	\draw[vecArrow] (a) to (b);
+	\draw[vecArrow] (b) to (c);
+	
+	\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1}]
+
+	\node[right= 4.5cm of a.east](d) {
+		\begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
+			$\rightarrow$ & in & \\\cline{2-2}
+			& out & $\rightarrow$ \\\cline{2-2}
+			& err & $\rightarrow$  \\\cline{2-2}
+			$\rightarrow$&fd[0]&$\rightarrow$\\\cline{2-2}
+			$\rightarrow$&fd[1]&$\rightarrow$\\\cline{2-2}
+		\end{tabular}
+	};
+	
+	\node[below= 1cm of d.south] (e) {
+		\begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
+			pipe $\rightarrow$&\sout{out} fd[1]&$\rightarrow$ pipe \\\cline{2-2}
+			$\rightarrow$ & out & \\\cline{2-2}
+			& err &$\rightarrow$ \\\cline{2-2}
+			$\rightarrow$&fd[0]&$\rightarrow$ \\\cline{2-2}
+			$\rightarrow$&fd[1]&$\rightarrow$ \\\cline{2-2}
+		\end{tabular}
+	};
+	\node[below= 1cm of e.south] (f) {
+		\begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
+			pipe $\rightarrow$&fd[1]&$\rightarrow$ pipe \\\cline{2-2}
+			$\rightarrow$& out & \\\cline{2-2}
+			& err & $\rightarrow$ \\\cline{2-2}
+			$\rightarrow$&fd[0]&$\rightarrow$ \\\cline{2-2}
+			$\rightarrow$&fd[1]&$\rightarrow$ \\\cline{2-2}
+		\end{tabular}
+	};
+	\end{scope}
+
+	\node[draw,right= .25cm of d.east] (we) {
+		\begin{lstlisting}
+int fd[2];
+pipe(fd);
+		\end{lstlisting}
+		};
+	\node[draw,right= .25cm of e.east] (xe)  {
+		\begin{lstlisting} 
+dup2(fd[1],0}; 
+		\end{lstlisting}
+		};
+	\node[draw,right= .25cm of f.east] (ye) {Final Result};
+
+	\node[draw, right= 1.9cm of c.east](p) {pipe};
+	
+	\draw[myarrow] (c.east) -- ++(0,.4) --(p.west);
+	\draw[myarrow, yshift= .2cm] (p.east) -- (f.west);
+	\draw[vecArrow] (d) to (e);
+	\draw[vecArrow] (e) to (f);
+\end{tikzpicture}
+\end{document}
