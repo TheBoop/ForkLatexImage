@@ -1,49 +1,55 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows}
-%listing package
-\begin{document}
+\usepackage{tikz,listings, soul}
+\usetikzlibrary{shapes.geometric, arrows, positioning, backgrounds, calc}
 
-\tikzstyle{pid} = [rectangle,rounded corners, minimum width=3cm, minimum height=1cm, text width=3cm,text centered, draw=black]
-\tikzstyle{action} = [rectangle,minimum width=3cm, minimum height=1cm, text centered, draw=black]
-\tikzstyle{comment} = [rectangle,rounded corners,text centered,draw=black, minimum height=0.8cm,fill=yellow!10]
-\tikzstyle{state} = [circle, minimum size=1cm, thick ,draw=black,text centered]
+\begin{document}
+\lstset{language=C++}  
+
+\tikzstyle{parent} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, draw=black, thick, fill=yellow!30]
+\tikzstyle{child} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, text centered, draw=black, thick, fill=yellow!30]
 \tikzstyle{arrow} = [thick,->,>=stealth,scale=2]
 
 \begin{tikzpicture}[
-    node distance=2cm,
-    level distance=2.5cm,
-    level 1/.style = {sibling distance=6cm},
-    level 2/.style = {sibling distance=6cm}
+node distance=2cm,
+level distance=3cm,
+level 1/.style = {sibling distance=8cm}
 ]
+%\draw [help lines] (-5,2) grid (5,-10);
 
-\node(start)[pid, fill=red!10]{Parent};
-\node(fork1)[action, below of=start]{int PID = fork()}
-child{
-    node(child1)[pid, fill=blue!10]{Child\\ $PID==0$}
-    child{
-        node(exit1)[state]{exit}
-    }
-}
-child{
-        node(parent1)[pid, fill=green!10]{Parent\\ $PID>0$}
-        child{ 
-            node(wait)[state]{wait()}
-            child{
-                node(blank1){}
-            }
-        }
-    }
-;
+\node(fork1)[parent]{
+\begin{lstlisting}
+int pid=fork
+\end{lstlisting}
+};
 
-\draw [arrow] (start) -- (fork1);
-\draw [arrow] (fork1) -- (child1);
-\draw [arrow] (fork1) -- (parent1);
-\draw [arrow] (child1) -- node[anchor=east,comment]{execvp(arg[0],argv)} (exit1);
-\draw [arrow] (parent1) -- (wait);
-\draw [arrow] (exit1) -- node[anchor=south,comment]{zombie process} (wait);
-\draw [arrow] (wait) -- node[anchor=east,comment]{shell process} (blank1);
+\node(wait) at (5,0)[parent]{
+\begin{lstlisting}
+wait
+\end{lstlisting}
+};
+
+\node(child1) at (0,-3.5)[child,fill=yellow!40]
+{
+\begin{lstlisting}
+execvp
+\end{lstlisting}
+};
+
+\node(child1d) [above=0.2cm of child1]{CHILD};
+\node(parent1d) [above=0.2cm of fork1]{PARENT};
+
+%Back Ground Outline
+\begin{pgfonlayer}{background}
+\path[fill=blue!20,rounded corners, thick ,draw=black!50, dashed]
+($(child1.north west)+(-0.3,1)$)  rectangle ($(child1.south east)+(0.3,-0.4)$);
+\path[fill=green!20,rounded corners, thick ,draw=black!50, dashed]
+($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait.south east)+(0.3,-0.4)$);
+\end{pgfonlayer}
+
+\draw [arrow] (fork1) -- ($(child1.north)+(0,0.5)$);
+\draw [arrow] (fork1) -- (wait);
+
 
 \end{tikzpicture}
 
