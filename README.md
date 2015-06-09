@@ -1,5 +1,6 @@
 # ForkLatexImage
 Latex generated images for dupe, pipe, and forks. Including a very simple Legend.
+There are pre-loaded images in bin file.
 
 ### Compiling images
 First make sure you have dvips, ps2pdf, latex and the full texlive set of packages installed. You can install them by running the command (This will take several minutes):
