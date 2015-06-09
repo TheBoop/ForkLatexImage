@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage{nopageno}
 \usepackage[utf8]{inputenc}
-\usepackage{tikz,listings, soul}
+\usepackage{tikz,listings, soul,lipsum, graphicx, amssymb, array, multirow}
 \usetikzlibrary{shapes.geometric, arrows, decorations.markings, positioning, backgrounds, calc}
 
 \begin{document}
@@ -14,48 +14,30 @@
   double distance=1.4pt, shorten >= 5.5pt,
   preaction = {decorate},
   postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
+\hspace{-2cm}
+\begin{tikzpicture}
+\node(input) at (2.5,3){\textbf{\Large LEGEND}};
 
-\begin{tikzpicture}[
-node distance=2cm,
-level distance=3cm,
-level 1/.style = {sibling distance=8cm}
-]
-%\draw [help lines] (-5,2) grid (5,-10);
-\node(input) at (2.5,3){\textbf{\Large Single Fork}};
-\node(fork1)[parent]{
-\begin{lstlisting}
-int pid=fork
-\end{lstlisting}
-};
+\draw[very thick, below= .5cm of input.south] (-5,2) -- (10,2);
 
-\node(wait) at (5,0)[parent]{
-\begin{lstlisting}
-wait
-\end{lstlisting}
-};
+\node(code) at (-2.4,0) [child] {code};
 
-\node(child1) at (0,-3.5)[child,fill=yellow!40]
-{
-\begin{lstlisting}
-execvp
-\end{lstlisting}
-};
-
-\node(child1d) [above=0.2cm of child1]{CHILD};
-\node(parent1d) [above=0.2cm of fork1]{PARENT};
-
+\node(ioe) [draw, below= .5cm of code.south, rectangle, minimum width =3cm, minimum height = 1.5cm]{system};
 %Back Ground Outline
+\node(parent) [right= 2.5cm of code.east] {PARENT};
+\node(child) [below=1.5cm of parent.south] {CHILD};
 \begin{pgfonlayer}{background}
 \path[fill=blue!20,rounded corners, thick ,draw=black!50, dashed]
-($(child1.north west)+(-0.3,1)$)  rectangle ($(child1.south east)+(0.3,-0.4)$);
+($(child.north west)+(-.5,.5)$)  rectangle ($(child.south east)+(.5,-.5)$);
 \path[fill=green!20,rounded corners, thick ,draw=black!50, dashed]
-($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait.south east)+(0.3,-0.4)$);
+($(parent.north west)+(-.5,.5)$)  rectangle ($(parent.south east)+(.5,-.5)$);
 \end{pgfonlayer}
 
-\draw [arrow] (fork1) -- ($(child1.north)+(0,1)$);
-\draw [arrow] (fork1) -- (wait);
+\node(dash) [right=1.5cm of parent.east] {flow of information};
+\draw [thick,dashed,->] (dash) -- ($(dash.east)+(1,0)$);
 
+\node(thick) [below=1.5cm of dash.south] {flow of time};
+\draw [arrow] (thick) -- ($(thick.east)+(1,0)$);
 
 \end{tikzpicture}
-
 \end{document}

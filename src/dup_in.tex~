@@ -11,7 +11,7 @@
 \usetikzlibrary{positioning}
 
 \tikzstyle{parent} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, draw=black, thick, fill=yellow!30]
-\tikzstyle{code} = [rectangle, rounded corners, minimum width=4cm, minimum height=1.5cm, text centered, draw=black, thick, fill=yellow!30]
+\tikzstyle{code} = [rectangle, rounded corners, minimum width=4cm, minimum height=1.25cm, text centered, draw=black, thick, fill=yellow!30]
 \tikzstyle{arrow} = [thick,->,>=stealth,scale=2]
 
 \tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position

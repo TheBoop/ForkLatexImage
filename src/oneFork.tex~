@@ -51,7 +51,7 @@ execvp
 ($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait.south east)+(0.3,-0.4)$);
 \end{pgfonlayer}
 
-\draw [arrow] (fork1) -- ($(child1.north)+(0,0.5)$);
+\draw [arrow] (fork1) -- ($(child1.north)+(0,1)$);
 \draw [arrow] (fork1) -- (wait);
 
 

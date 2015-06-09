@@ -1,4 +1,5 @@
 \documentclass{article}
+\usepackage{nopageno}
 \usepackage[utf8]{inputenc}
 \usepackage{tikz,listings, soul}
 \usetikzlibrary{shapes.geometric, decorations.markings, arrows, positioning, backgrounds, calc, matrix}
@@ -22,66 +23,72 @@ node distance=2cm,
 %\draw [help lines] (-5,2) grid (5,-10);
 \node(input) at (2.5,3){\textbf{\Large Multiple Forks with Piping}};
 
-\node(fork1) at (-5,0)[parent]{
+\node(pipe) at (-5, 0) [parent]{
+\begin{lstlisting}
+int fd[2];
+pipe(fd);
+\end{lstlisting}
+};
+\node(fork1) at (-5,-3)[parent]{
 \begin{lstlisting}
 int pid = fork()
 \end{lstlisting}
 };
 
-\node(fork2) at (0,0) [parent]{
+\node(fork2) at (0,-3) [parent]{
 \begin{lstlisting}
 int pid2 = fork()
 \end{lstlisting}
 };
 
-\node(fork3) at (5,0) [parent]{
+\node(fork3) at (5,-3) [parent]{
 \begin{lstlisting}
 int pid3 = fork()
 \end{lstlisting}
 };
 
-\node(wait) at (10,0)[parent]{
+\node(wait) at (10,-3)[parent]{
 \begin{lstlisting}
 wait();
 \end{lstlisting}
 };
 
-\node(child1) at (-5,-3)[child,fill=yellow!40]
+\node(child1) at (-5,-6)[child,fill=yellow!40]
 {
 \begin{lstlisting}
 dup2
 \end{lstlisting}
 };
 
-\node(child2) at (-0,-3)[child,fill=yellow!40]
+\node(child2) at (-0,-6)[child,fill=yellow!40]
 {
 \begin{lstlisting}
 dup2
 \end{lstlisting}
 };
 
-\node(child3) at (5,-3)[child,fill=yellow!40]
+\node(child3) at (5,-6)[child,fill=yellow!40]
 {
 \begin{lstlisting}
 dup2
 \end{lstlisting}
 };
 
-\node(child12) at (-5,-5)[child,fill=yellow!40]
+\node(child12) at (-5,-8)[child,fill=yellow!40]
 {
 \begin{lstlisting}
 execvp
 \end{lstlisting}
 };
 
-\node(child22) at (-0,-5)[child,fill=yellow!40]
+\node(child22) at (-0,-8)[child,fill=yellow!40]
 {
 \begin{lstlisting}
 execvp
 \end{lstlisting}
 };
 
-\node(child32) at (5,-5)[child,fill=yellow!40]
+\node(child32) at (5,-8)[child,fill=yellow!40]
 {
 \begin{lstlisting}
 execvp
@@ -107,6 +114,8 @@ execvp
 ($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait.south east)+(0.3,-0.4)$);
 \end{pgfonlayer}
 
+
+\draw [arrow] (pipe) -- ($(fork1.north)+(0,1)$);
 \draw [arrow] (fork1) -- ($(child1.north)+(0,1)$);
 \draw [arrow] (fork2) -- ($(child2.north)+(0,1)$);
 \draw [arrow] (fork3) -- ($(child3.north)+(0,1)$);
