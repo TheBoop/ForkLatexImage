@@ -73,7 +73,7 @@ dup2(newfile,1);
 		};
 	\node[draw,below left= 2cm of c.south west, yshift = -.35cm,rounded corners,fill=yellow!40] (z) {
 		\begin{lstlisting} 
-close(newfile)
+close{newfile} 
 		\end{lstlisting}
 		};
 	\draw[vecArrow] (a) to (b);
