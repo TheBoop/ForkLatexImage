@@ -7,8 +7,8 @@
 \usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{tikz}
-\usepackage{listings}
-\usetikzlibrary{arrows, decorations.markings,calc}
+\usepackage{listings,nopageno}
+\usetikzlibrary{arrows, decorations.markings,calc, backgrounds}
 \usetikzlibrary{positioning}
 
 \tikzstyle{parent} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, draw=black, thick, fill=yellow!30]
@@ -20,47 +20,13 @@
   preaction = {decorate},
   postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
 \tikzstyle{innerWhite} = [semithick, white,line width=1.4pt, shorten >= 4.5pt]
+\newcommand{\xdashrightarrow}[2][]{\ext@arrow 0359\rightarrowfill@@{#1}{#2}}
 
 \begin{document}
 \hspace{-4cm}
 \begin{tikzpicture}
-<<<<<<< HEAD
-=======
-	\tikzset{
-		myarrow/.style={->,>=latex', shorten >=1pt, thick}
-	}
-	\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1}]
-	\node(a) {
-		\begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
-			$\rightarrow$ & in & \\\cline{2-2}
-			& out & $\rightarrow$ \\\cline{2-2}
-			& err & $\rightarrow$  \\\cline{2-2}
-			$\rightarrow$&fd[0]& \\\cline{2-2}
-			&fd[1]&$\rightarrow$ \\\cline{2-2}
-		\end{tabular}
-	};
-	
-	\node[below= 1cm of a.south] (b) {
-		\begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
-			$\rightarrow$ & in & \\\cline{2-2}
-			pipe $\rightarrow$&\sout{out} fd[0]&$\rightarrow$ pipe \\\cline{2-2}
-			& err &$\rightarrow$ \\\cline{2-2}
-			$\rightarrow$&fd[0]& \\\cline{2-2}
-			&fd[1]&$\rightarrow$ \\\cline{2-2}
-		\end{tabular}
-	};
-	\node[below= 1cm of b.south] (c) {
-		\begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
-			$\rightarrow$& in & \\\cline{2-2}
-			pipe $\rightarrow$& fd[0] &$\rightarrow$ pipe \\\cline{2-2}
-			& err & $\rightarrow$ \\\cline{2-2}
-			$\rightarrow$&fd[0]&$\rightarrow$ \\\cline{2-2}
-			$\rightarrow$&fd[1]&$\rightarrow$ \\\cline{2-2}
-		\end{tabular}
-	};
-	\end{scope}
->>>>>>> d377226403cba4edbc7fa70724edd66bdbcb0259
 
+\node(title)at (4.5,4)[font=\Huge]{\textbf{Pipping}};
 \node(fork1)at (-4,0)[parent]{
 \begin{lstlisting}
 int pid=fork
@@ -77,12 +43,12 @@ wait()
 \end{lstlisting}
 };
 
+%Set above fork1
 \tikzset{
 myarrow/.style={->,>=latex', shorten >=1pt, thick}
-}
-    
-\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1}]
-\node(a)[above= 4cm of fork1] {
+}    
+\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1,fill=white}]
+\node(a)[above= 3.6cm of fork1] {
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
 key $\rightarrow$ & in & \\\cline{2-2}
 & out & $\rightarrow$ disp \\\cline{2-2}
@@ -92,7 +58,7 @@ key $\rightarrow$ & in & \\\cline{2-2}
  
 \end{tabular}
 };	
-\node[below= 1cm of a.south] (b) {
+\node[below= 0.7cm of a.south] (b) {
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
 key $\rightarrow$ & in & \\\cline{2-2}
 & out & $\rightarrow$ disp \\\cline{2-2}
@@ -114,8 +80,9 @@ pipe(fd);
 int fd[2];
 \end{lstlisting}
 };
-    
-\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1}]
+
+%SET BELOW FORK1
+\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1,fill=white}]
 
 \node(c1) at (-4,-2.5){
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
@@ -128,7 +95,7 @@ pipe $\rightarrow$	& fd[0] &  \\\cline{2-2}
 };
 \node[below= 1cm of c1.south] (d1) {
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
-pipe $\rightarrow$ & in & \\\cline{2-2}
+pipe $\rightarrow$ & fd[0] & \\\cline{2-2}
 & out & $\rightarrow$ disp \\\cline{2-2}
 & err & $\rightarrow$ disp \\\cline{2-2}
 pipe $\rightarrow$	& fd[0] & \\\cline{2-2}
@@ -146,23 +113,24 @@ pipe $\rightarrow$ & fd[0] & \\\cline{2-2}
 };
 \end{scope}
 
-\node[draw,left= .25cm of c1.west,code] (x)  {
+\node[draw,left= .25cm of c1.west,code] (code11)  {
     \begin{lstlisting}
 close(fd[1]);
     \end{lstlisting}
 };
-\node[draw,left= .25cm of d1.west,code] (w) {
+\node[draw,left= .25cm of d1.west,code] (code12) {
     \begin{lstlisting}
 dup2(fd[0],0);
     \end{lstlisting}
 };
-\node[draw,left= .25cm of e1.west,code] (x)  {
+\node[draw,left= .25cm of e1.west,code] (code13)  {
     \begin{lstlisting}
 close(fd[0]);
      \end{lstlisting}
 };
 
-\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1}]
+%SET BELOW FORK2
+\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1,fill=white}]
 
 \node(c2) at (2,-2.5){
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
@@ -176,7 +144,7 @@ key $\rightarrow$ & in & \\\cline{2-2}
 \node[below= 1cm of c2.south] (d2) {
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
 key $\rightarrow$ & in & \\\cline{2-2}
-& out & $\rightarrow$ disp \\\cline{2-2}
+& fd[1]	& $\rightarrow$ disp \\\cline{2-2}
 & err & $\rightarrow$ disp \\\cline{2-2}
     & fd[0] & \\\cline{2-2}
         & fd[1] & $\rightarrow$ pipe \\\cline{2-2}
@@ -185,7 +153,7 @@ key $\rightarrow$ & in & \\\cline{2-2}
     \node[below= 1cm of d2.south] (e2) {
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
 key $\rightarrow$ & in & \\\cline{2-2}
-& out & $\rightarrow$ pipe \\\cline{2-2}
+& fd[1]	& $\rightarrow$ pipe \\\cline{2-2}
 & err & $\rightarrow$ disp \\\cline{2-2}	
 & fd[0] & \\\cline{2-2}
        	& fd[1] & $\rightarrow$ \sout{pipe}\\\cline{2-2}
@@ -194,17 +162,17 @@ key $\rightarrow$ & in & \\\cline{2-2}
 \end{scope}
 
 
-\node[draw,right= .25cm of c2.east,code] (x)  {
+\node[draw,right= .25cm of c2.east,code] (code21)  {
     \begin{lstlisting}
 close(fd[0]);
     \end{lstlisting}
 };
-\node[draw,right= .25cm of d2.east,code] (w) {
+\node[draw,right= .25cm of d2.east,code] (code22) {
     \begin{lstlisting}
 dup2(fd[1],1);
     \end{lstlisting}
 };
-\node[draw,right= .25cm of e2.east,code] (x)  {
+\node[draw,right= .25cm of e2.east,code] (code23)  {
     \begin{lstlisting}
 close(fd[1]);
      \end{lstlisting}
@@ -220,7 +188,7 @@ execvp(arg[0],args);
      \end{lstlisting}
 };
 
-
+%ALL THE LINES
 \draw[vecArrow] ++(a.north) to (a.north);
 \draw[vecArrow] (c1) to (d1);
 \draw[vecArrow] (d1) to (e1);
@@ -235,6 +203,29 @@ execvp(arg[0],args);
 \draw[vecArrow] (e1) to (execvp1);
 \draw[vecArrow] (e2) to (execvp2);
 \draw[vecArrow] (wait.east) to ($(wait.east)+(1,0)$);
+\draw[thick,dashed,->] (execvp1) -- (execvp2);
+
+\node(parent1d) [left=of fork1,font=\large]{\textbf{PARENT}};
+\node(child1d) [below=0.5cm and -1cm of execvp1,font=\large]{\textbf{CHILD1}};
+\node(child2d) [below=0.5cm and -1cm of execvp2,font=\large]{\textbf{CHILD2}};
+
+%Background colors
+\begin{pgfonlayer}{background}
+%Child1
+    \path[fill=blue!20,rounded corners]
+    ($(code11.north west)+(-0.3,0.8)$)  rectangle ($(execvp1.south east)+(0.6,-1.5)$);
+    %Child2
+    \path[fill=blue!20,rounded corners]
+    ($(c2.north west)+(-0.3,0.3)$)  rectangle ($(execvp2.south east)+(3.5,-1.5)$);
+    %Parent1
+    \path[fill=green!20,rounded corners]
+    ($(fd.north west)+(-0.3,0.6)$)  rectangle ($(fork1.south east)+(1,-0.4)$);
+    %Parent2
+    \path[fill=green!20,rounded corners]
+    ($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait.south east)+(1.5,-0.4)$);
+\end{pgfonlayer}
 
 \end{tikzpicture}
 \end{document}
+
+
