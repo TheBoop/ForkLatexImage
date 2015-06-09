@@ -11,8 +11,8 @@
 \usetikzlibrary{arrows, decorations.markings,calc, backgrounds}
 \usetikzlibrary{positioning}
 
-\tikzstyle{parent} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, draw=black, thick, fill=yellow!30]
-\tikzstyle{code} = [rectangle, rounded corners, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, thick, fill=yellow!30]
+\tikzstyle{parent} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, draw=black, thick, fill=yellow!40]
+\tikzstyle{code} = [rectangle, rounded corners, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, thick, fill=yellow!40]
 \tikzstyle{arrow} = [thick,->,>=stealth,scale=2]
 \tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
   1 with {\arrow[semithick]{open triangle 60}}},
@@ -48,7 +48,7 @@ wait()
 myarrow/.style={->,>=latex', shorten >=1pt, thick}
 }    
 \begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1,fill=white}]
-\node (a)[above= 3.6cm of fork1] {
+\node (a)[above= 3.2cm of fork1] {
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
 key $\rightarrow$ & in & \\\cline{2-2}
 & out & $\rightarrow$ disp \\\cline{2-2}
@@ -58,7 +58,7 @@ key $\rightarrow$ & in & \\\cline{2-2}
  
 \end{tabular}
 };	
-\node[below= 0.7cm of a.south] (b) {
+\node[below= 0.6cm of a.south] (b) {
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
 key $\rightarrow$ & in & \\\cline{2-2}
 & out & $\rightarrow$ disp \\\cline{2-2}
@@ -134,27 +134,27 @@ close(fd[0]);
 
 \node(c2) at (2,-2.5){
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
-key $\rightarrow$ & in & \\\cline{2-2}
-& out & $\rightarrow$ disp \\\cline{2-2}
-& err & $\rightarrow$ disp \\\cline{2-2}
+key $\rightarrow$& in & \\\cline{2-2}
+                        & out & $\rightarrow$ disp \\\cline{2-2}
+                        & err & $\rightarrow$ disp \\\cline{2-2}
 \sout{pipe}$\rightarrow$& fd[0] &  \\\cline{2-2}
-        & fd[1] & $\rightarrow$ pipe \\\cline{2-2}
+                        & fd[1] & $\rightarrow$ pipe \\\cline{2-2}
 \end{tabular}
 };
 \node[below= 1cm of c2.south] (d2) {
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
 key $\rightarrow$ & in & \\\cline{2-2}
-& fd[1]	& $\rightarrow$ disp \\\cline{2-2}
-& err & $\rightarrow$ disp \\\cline{2-2}
-    & fd[0] & \\\cline{2-2}
-        & fd[1] & $\rightarrow$ pipe \\\cline{2-2}
+    & fd[1]	& $\rightarrow$ disp \\\cline{2-2}
+    & err       & $\rightarrow$ disp \\\cline{2-2}
+    & fd[0]     & \\\cline{2-2}
+    & fd[1]     & $\rightarrow$ pipe \\\cline{2-2}
 \end{tabular}
 };
     \node[below= 1cm of d2.south] (e2) {
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
 key $\rightarrow$ & in & \\\cline{2-2}
 & fd[1]	& $\rightarrow$ pipe \\\cline{2-2}
-& err & $\rightarrow$ disp \\\cline{2-2}	
+& err   & $\rightarrow$ disp \\\cline{2-2}	
 & fd[0] & \\\cline{2-2}
        	& fd[1] & $\rightarrow$ \sout{pipe}\\\cline{2-2}
 \end{tabular}
@@ -219,7 +219,7 @@ execvp(arg[0],args);
     ($(c2.north west)+(-0.3,0.3)$)  rectangle ($(execvp2.south east)+(3.5,-1.5)$);
     %Parent1
     \path[fill=green!20,rounded corners]
-    ($(fd.north west)+(-0.3,0.6)$)  rectangle ($(fork1.south east)+(1,-0.4)$);
+    ($(fd.north west)+(-0.3,0.4)$)  rectangle ($(fork1.south east)+(1,-0.4)$);
     %Parent2
     \path[fill=green!20,rounded corners]
     ($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait.south east)+(1.5,-0.4)$);
