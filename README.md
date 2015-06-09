@@ -1,4 +1,6 @@
 # ForkLatexImage
+By David Ding(TheBoop) and Jerome Barbero(jbarb011)
+
 Latex generated images for dupe, pipe, and forks. Including a very simple Legend.
 
 There are pre-loaded images in bin file.
