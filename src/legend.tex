@@ -33,10 +33,10 @@
 ($(parent.north west)+(-.5,.5)$)  rectangle ($(parent.south east)+(.5,-.5)$);
 \end{pgfonlayer}
 
-\node(dash) [right=1.5cm of parent.east] {flow of information};
+\node(dash) [right=1.5cm of parent.east,fill=white] {flow of information};
 \draw [thick,dashed,->] (dash) -- ($(dash.east)+(1,0)$);
 
-\node(thick) [below=1.5cm of dash.south] {flow of time};
+\node(thick) [below=1.5cm of dash.south,fill=white] {flow of time};
 \draw [arrow] (thick) -- ($(thick.east)+(1,0)$);
 
 \end{tikzpicture}

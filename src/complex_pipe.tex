@@ -24,9 +24,10 @@
 
 \begin{document}
 \hspace{-4cm}
+\vspace{5cm}
 \begin{tikzpicture}
 
-\node(title)at (4.5,4)[font=\Huge]{\textbf{Pipping}};
+\node(title)at (4.5,4)[font=\Huge]{\textbf{Piping}};
 \node(fork1)at (-4,0)[parent]{
 \begin{lstlisting}
 int pid=fork
@@ -219,7 +220,7 @@ execvp(arg[0],args);
     ($(c2.north west)+(-0.3,0.3)$)  rectangle ($(execvp2.south east)+(3.5,-1.5)$);
     %Parent1
     \path[fill=green!20,rounded corners]
-    ($(fd.north west)+(-0.3,0.4)$)  rectangle ($(fork1.south east)+(1,-0.4)$);
+    ($(fd.north west)+(-0.3,0.8)$)  rectangle ($(fork1.south east)+(1,-0.4)$);
     %Parent2
     \path[fill=green!20,rounded corners]
     ($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait.south east)+(1.5,-0.4)$);
