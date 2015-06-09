@@ -1,4 +1,4 @@
-all: dup_out dup_in oneFork multFork ForkandDup Legend complex_pipe input_redirection output_redirection
+all: dup_out dup_in one_fork mult_fork simple_pipe legend complex_pipe input_redirection output_redirection
 
 folders: bin left_overs
 
@@ -8,19 +8,19 @@ bin:
 left_overs:
 	mkdir left_overs
 
-oneFork: folders
-	latex src/oneFork.tex
-	dvips oneFork.dvi
-	ps2pdf oneFork.ps
-	mv oneFork.pdf bin
-	mv oneFork.* left_overs
+one_fork: folders
+	latex src/one_fork.tex
+	dvips one_fork.dvi
+	ps2pdf one_fork.ps
+	mv one_fork.pdf bin
+	mv one_fork.* left_overs
 
-multFork: folders
-	latex src/multFork.tex
-	dvips multFork.dvi
-	ps2pdf multFork.ps
-	mv multFork.pdf bin
-	mv multFork.* left_overs
+mult_fork: folders
+	latex src/mult_fork.tex
+	dvips mult_fork.dvi
+	ps2pdf mult_fork.ps
+	mv mult_fork.pdf bin
+	mv mult_fork.* left_overs
 
 dup_out: folders
 	latex src/dup_out.tex
@@ -36,19 +36,19 @@ dup_in: folders
 	mv dup_in.pdf bin
 	mv dup_in.* left_overs
 
-ForkandDup: folders
-	latex src/ForkandDup.tex
-	dvips ForkandDup.dvi
-	ps2pdf ForkandDup.ps
-	mv ForkandDup.pdf bin
-	mv ForkandDup.* left_overs
+simple_pipe: folders
+	latex src/simple_pipe.tex
+	dvips simple_pipe.dvi
+	ps2pdf simple_pipe.ps
+	mv simple_pipe.pdf bin
+	mv simple_pipe.* left_overs
 
-Legend: folders
-	latex src/Legend.tex
-	dvips Legend.dvi
-	ps2pdf Legend.ps
-	mv Legend.pdf bin
-	mv Legend.* left_overs
+legend: folders
+	latex src/legend.tex
+	dvips legend.dvi
+	ps2pdf legend.ps
+	mv legend.pdf bin
+	mv legend.* left_overs
 
 complex_pipe: folders
 	latex src/complex_pipe.tex
