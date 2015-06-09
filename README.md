@@ -1,13 +1,16 @@
 # ForkLatexImage
-images for fork using tikz
+Latex generated images for dupe, pipe, and forks. Including a very simple Legend.
 
 ### Compiling images
 First make sure you have dvips, ps2pdf, latex and the full texlive set of packages installed. You can install them by running the command (This will take several minutes):
 ```
 sudo apt-get install texlive-full
 ```
-
-To create the pdf files run:
+Then clone the repository using:
+```
+git clone https://github.com/TheBoop/ForkLatexImage.git
+```
+Then to create the pdf files run:
 ```
 make all
 ```
