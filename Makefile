@@ -3,11 +3,9 @@ all: dup_out dup_in dup_pipe oneFork multFork
 folders: bin left_overs
 
 bin:
-	rm -R bin
 	mkdir bin
 
 left_overs:
-	rm -R left_overs
 	mkdir left_overs
 
 oneFork: folders
