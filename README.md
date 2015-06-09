@@ -3,7 +3,7 @@ By David Ding(TheBoop) and Jerome Barbero(jbarb011)
 
 Latex generated images for dupe, pipe, and forks. Including a very simple Legend.
 
-![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/legend.png)
+![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/legend_.png)
 
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/singlefork.png)
 
