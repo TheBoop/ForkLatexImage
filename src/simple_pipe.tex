@@ -7,13 +7,13 @@
 \begin{document}
 \lstset{language=C++}  
 
-\tikzstyle{parent} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.2cm, draw=black, thick, fill=yellow!30]
-\tikzstyle{child} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.2cm, text centered, draw=black, thick, fill=yellow!30]
+\tikzstyle{parent} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.2cm, draw=black, thick, fill=yellow!40]
+\tikzstyle{child} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.2cm, text centered, draw=black, thick, fill=yellow!40]
 \tikzstyle{arrow} = [thick, decoration={markings,mark=at position
-  1 with {\arrow[semithick]{open triangle 60}}},
-  double distance=1.4pt, shorten >= 5.5pt,
-  preaction = {decorate},
-  postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
+1 with {\arrow[semithick]{open triangle 60}}},
+double distance=1.4pt, shorten >= 5.5pt,
+preaction = {decorate},
+postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
 
 
 \hspace*{-4.5cm}
@@ -25,8 +25,9 @@ node distance=2cm,
 
 \node(pipe) at (-5, 0) [parent]{
 \begin{lstlisting}
-int fd[2];
+int fd[4];
 pipe(fd);
+pipe(fd+2);
 \end{lstlisting}
 };
 \node(fork1) at (-5,-3)[parent]{
@@ -53,49 +54,54 @@ wait();
 \end{lstlisting}
 };
 
-\node(child1) at (-5,-6)[child,fill=yellow!40]
+\node(child1) at (-5,-6)[child]
 {
 \begin{lstlisting}
-dup2
+dup2(fd[1],1)
 \end{lstlisting}
 };
 
-\node(child2) at (-0,-6)[child,fill=yellow!40]
+\node(child2) at (0,-6)[child]
 {
 \begin{lstlisting}
-dup2
+dup2(fd[0],0)
 \end{lstlisting}
 };
 
-\node(child3) at (5,-6)[child,fill=yellow!40]
+\node(child2s) at (0,-8)[child]
 {
 \begin{lstlisting}
-dup2
+dup2(fd[3],1)
 \end{lstlisting}
 };
 
-\node(child12) at (-5,-8)[child,fill=yellow!40]
+\node(child3) at (5,-6)[child]
 {
 \begin{lstlisting}
-execvp
+dup2(fd[2],0)
 \end{lstlisting}
 };
 
-\node(child22) at (-0,-8)[child,fill=yellow!40]
-{
-\begin{lstlisting}
-execvp
-\end{lstlisting}
-};
-
-\node(child32) at (5,-8)[child,fill=yellow!40]
+\node(child12) at (-5,-8)[child]
 {
 \begin{lstlisting}
 execvp
 \end{lstlisting}
 };
 
+\node(child22) at (-0,-10)[child]
+{
+\begin{lstlisting}
+execvp
+\end{lstlisting}
+};
 
+\node(child32) at (5,-8)[child]
+{
+\begin{lstlisting}
+execvp
+\end{lstlisting}
+};
 
 \node(child1d) [above=0.2cm of child1]{CHILD1};
 \node(child1d) [above=0.2cm of child2]{CHILD2};
@@ -124,12 +130,12 @@ execvp
 \draw [arrow] (fork3) -- (wait);
 \draw [arrow] (wait.east) -- ($(wait.east)+(1,0)$);
 \draw [arrow] (child1) -- (child12);
-\draw [arrow] (child2) -- (child22);
+\draw [arrow] (child2) -- (child2s);
+\draw [arrow] (child2s) -- (child22);
 \draw [arrow] (child3) -- (child32);
-\draw [thick,dashed,->] (child12) -- ($(child22.west)+(-0.4,0)$);
-\draw [thick,dashed,->] (child22) -- ($(child32.west)+(-0.4,0)$);
+\draw [thick,dashed,->] (child12.east) -- ($(child22.west)+(-0.4,0)$);
+\draw [thick,dashed,->] (child22.east) -- ($(child32.west)+(-0.4,0)$);
 
 \end{tikzpicture}
 
-
-\end{document}1
+\end{document}
