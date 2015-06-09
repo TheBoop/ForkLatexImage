@@ -7,8 +7,8 @@
 \begin{document}
 \lstset{language=C++}  
 
-\tikzstyle{parent} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, draw=black, thick, fill=yellow!30]
-\tikzstyle{child} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, text centered, draw=black, thick, fill=yellow!30]
+\tikzstyle{parent} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, draw=black, thick, fill=yellow!40]
+\tikzstyle{child} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, text centered, draw=black, thick, fill=yellow!40]
 \tikzstyle{arrow} = [thick, decoration={markings,mark=at position
   1 with {\arrow[semithick]{open triangle 60}}},
   double distance=1.4pt, shorten >= 5.5pt,
@@ -22,7 +22,7 @@
 
 \node(code) at (-2.4,0) [child] {code};
 
-\node(ioe) [draw, below= .5cm of code.south, rectangle, minimum width =3cm, minimum height = 1.5cm]{system};
+\node(ioe) [draw, below= .5cm of code.south, rectangle, minimum width =3cm, minimum height = 1.5cm,fill=white]{system};
 %Back Ground Outline
 \node(parent) [right= 2.5cm of code.east] {PARENT};
 \node(child) [below=1.5cm of parent.south] {CHILD};
