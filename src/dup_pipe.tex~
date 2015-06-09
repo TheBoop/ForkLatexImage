@@ -25,6 +25,7 @@
 		myarrow/.style={->,>=latex', shorten >=1pt, thick}
 	}
 	\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1}]
+
 	\node(a) {
 		\begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
 			$\rightarrow$ & in & \\\cline{2-2}
@@ -55,26 +56,24 @@
 	};
 	\end{scope}
 
+	\node[draw,left= .25cm of a.west] (w) {
+		\begin{lstlisting}
+int fd[2];
+pipe(fd);
+		\end{lstlisting}
+		};
+	\node[draw,left= .25cm of b.west] (x)  {
+		\begin{lstlisting} 
+dup2(fd[0],1}; 
+		\end{lstlisting}
+		};
+
 	\draw[vecArrow] (a) to (b);
 	\draw[vecArrow] (b) to (c);
 	
-	\node[draw,left= .25cm of a.west,rounded corners,fill=yellow!40] (w) {
-                \begin{lstlisting}
-int fd[2];
-pipe(fd);
-                \end{lstlisting}
-        };
-        \node[draw,left= .25cm of b.west,rounded corners,fill=yellow!40] (x)  {
-                \begin{lstlisting}
-dup2(fd[0],1};
-                \end{lstlisting}
-        };
-
-	
-
 	\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1}]
 
-	\node(d)[right= 4cm of a.east] {
+	\node[right= 4.5cm of a.east](d) {
 		\begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
 			$\rightarrow$ & in & \\\cline{2-2}
 			& out & $\rightarrow$ \\\cline{2-2}
@@ -104,13 +103,13 @@ dup2(fd[0],1};
 	};
 	\end{scope}
 
-	\node[draw,right= .25cm of d.east,rounded corners,fill=yellow!40] (we) {
+	\node[draw,right= .25cm of d.east] (we) {
 		\begin{lstlisting}
 int fd[2];
 pipe(fd);
 		\end{lstlisting}
 		};
-	\node[draw,right= .25cm of e.east,rounded corners,fill=yellow!40] (xe)  {
+	\node[draw,right= .25cm of e.east] (xe)  {
 		\begin{lstlisting} 
 dup2(fd[1],0}; 
 		\end{lstlisting}
@@ -118,6 +117,5 @@ dup2(fd[1],0};
 
 	\draw[vecArrow] (d) to (e);
 	\draw[vecArrow] (e) to (f);
-
 \end{tikzpicture}
 \end{document}
