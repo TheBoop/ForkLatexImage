@@ -12,7 +12,7 @@
 \usetikzlibrary{positioning}
 
 \tikzstyle{parent} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, draw=black, thick, fill=yellow!30]
-\tikzstyle{child} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, text centered, draw=black, thick, fill=yellow!30]
+\tikzstyle{code} = [rectangle, rounded corners, minimum width=4cm, minimum height=1.25cm, text centered, draw=black, thick, fill=yellow!30]
 \tikzstyle{arrow} = [thick,->,>=stealth,scale=2]
 
 \tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
@@ -25,6 +25,10 @@
 \begin{document}
 \hspace{-3.5cm}
 \begin{tikzpicture}
+	
+	\node(title) at (-3.5, 3){
+		\textbf{\Large Output Redirection}
+	};
 	\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=10cm,inner sep=1}]
 
 	\node(a) {
@@ -61,19 +65,19 @@
 		\end{tabular}
 	};
 	\end{scope}
-	\node[draw,below left= 2cm of a.south west, yshift= -.35cm, rounded corners,fill=yellow!40] (x)  {
+	\node[draw,left= 1cm of b.west, code] (x)  {
 		\begin{lstlisting} 
 int newfile = open("file"); 
 		\end{lstlisting}
 		};
-	\node[draw,below left= 2cm of b.south west, yshift = -.35cm, rounded corners,fill=yellow!40] (y) {
+	\node[draw,left= 1cm of c.west, code] (y) {
 		\begin{lstlisting} 
 dup2(newfile,1); 
 		\end{lstlisting}
 		};
-	\node[draw,below left= 2cm of c.south west, yshift = -.35cm,rounded corners,fill=yellow!40] (z) {
+	\node[draw, left= 1cm of d.west, code] (z) {
 		\begin{lstlisting} 
-close(newfile)
+close(newfile);
 		\end{lstlisting}
 		};
 	\draw[vecArrow] (a) to (b);

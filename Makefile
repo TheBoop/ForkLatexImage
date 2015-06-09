@@ -1,4 +1,4 @@
-all: dup_out dup_in dup_pipe oneFork multFork
+all: dup_out dup_in dup_pipe oneFork multFork ForkandDup
 
 folders: bin left_overs
 
@@ -14,6 +14,13 @@ oneFork: folders
 	ps2pdf oneFork.ps
 	mv oneFork.pdf bin
 	mv oneFork.* left_overs
+
+multFork: folders
+	latex src/multFork.tex
+	dvips multFork.dvi
+	ps2pdf multFork.ps
+	mv multFork.pdf bin
+	mv multFork.* left_overs
 
 dup_out: folders
 	latex src/dup_out.tex
@@ -36,11 +43,9 @@ dup_pipe: folders
 	mv dup_pipe.pdf bin
 	mv dup_pipe.* left_overs
 
-multFork: folders
-	latex src/multFork.tex
-	dvips multFork.dvi
-	ps2pdf multFork.ps
-	mv multFork.pdf bin
-	mv multFork.* left_overs
-
-
+ForkandDup: folders
+	latex src/ForkandDup.tex
+	dvips ForkandDup.dvi
+	ps2pdf ForkandDup.ps
+	mv ForkandDup.pdf bin
+	mv ForkandDup.* left_overs
