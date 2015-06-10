@@ -49,7 +49,7 @@ int pid3 = fork()
 
 \node(wait) at (10,-3)[parent]{
 \begin{lstlisting}
-wait();
+wait()
 \end{lstlisting}
 };
 
@@ -63,8 +63,8 @@ dup2(fd[1],1)
 \node(child2) at (0,-6)[child]
 {
 \begin{lstlisting}
-dup2(fd[0],0)
-dup2(fd[3],1)
+dup2(fd[0],0);
+dup2(fd[3],1);
 \end{lstlisting}
 };
 
