@@ -111,7 +111,7 @@ execvp
 \node(child2w) at (0,-10)[child]
 {
 \begin{lstlisting}
-wait
+wait();
 \end{lstlisting}
 };
 
@@ -125,7 +125,7 @@ execvp
 \node(child3w) at (5,-10)[child]
 {
 \begin{lstlisting}
-wait
+wait();
 \end{lstlisting}
 };
 
