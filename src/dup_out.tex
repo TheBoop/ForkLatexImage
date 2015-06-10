@@ -26,10 +26,6 @@
 \begin{document}
 \hspace{-3.5cm}
 \begin{tikzpicture}
-	
-	\node(title) at (-3.5, 3){
-		\textbf{\Large Output Redirection}
-	};
 	\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=10cm,inner sep=1,fill=white}]
 
 	\node(a) {
@@ -44,7 +40,7 @@
 			tty (keyboard) $\rightarrow$ & 0 & in & \\\cline{3-3}
 			& 1 & out & $\rightarrow$  tty (display) \\\cline{3-3}
 			& 2 & err & $\rightarrow$  tty (display) \\\cline{3-3}
-			file $\rightarrow$ & 3 & newfile & $\rightarrow$ file \\\cline{3-3}
+			file $\rightarrow$ & 3 & fd & $\rightarrow$ file \\\cline{3-3}
 		\end{tabular}
 	};
 	
@@ -54,7 +50,7 @@
 			tty (keyboard) $\rightarrow$ & 0 & in & \\\cline{3-3}
 			file $\rightarrow$ & 1 & \sout{out} newfile & $\rightarrow$ \sout{tty (display)} file \\\cline{3-3}
 			& 2 & err & $\rightarrow$ \ tty (display) \\\cline{3-3}
-			file $\rightarrow$ & 3 & newfile & $\rightarrow$ file \\\cline{3-3}
+			file $\rightarrow$ & 3 & fd & $\rightarrow$ file \\\cline{3-3}
 		\end{tabular}
 	};
 	\node[below= 1cm of c.south] (d) {
@@ -62,23 +58,23 @@
 			tty (keyboard) $\rightarrow$ & 0 & in & \\\cline{3-3}
 			file $\rightarrow$ & 1 & newfile & $\rightarrow$ file \\\cline{3-3}
 			& 2 & err & $\rightarrow$ tty (display) \\\cline{3-3}
-			\sout{file} $\rightarrow$ & 3 & \sout{newfile} & $\rightarrow$ \sout{file} \\\cline{3-3}
+			\sout{file} $\rightarrow$ & 3 & \sout{fd} & $\rightarrow$ \sout{file} \\\cline{3-3}
 		\end{tabular}
 	};
 	\end{scope}
 	\node[draw,left= 1cm of b.west, code] (x)  {
 		\begin{lstlisting} 
-int newfile = open("file"); 
+int fd = open("file"); 
 		\end{lstlisting}
 		};
 	\node[draw,left= 1cm of c.west, code] (y) {
 		\begin{lstlisting} 
-dup2(newfile,1); 
+dup2(fd,1); 
 		\end{lstlisting}
 		};
 	\node[draw, left= 1cm of d.west, code] (z) {
 		\begin{lstlisting} 
-close(newfile);
+close(fd);
 		\end{lstlisting}
 		};
 	\draw[vecArrow] (a) to (b);
