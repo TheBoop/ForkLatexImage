@@ -162,14 +162,8 @@ execvp
 \draw [arrow] (fork2) -- (fork3);
 \draw [arrow] (fork3) -- (wait);
 \draw [arrow] (wait.east) -- ($(wait.east)+(1,0)$);
-\draw [arrow] (child1) -- (child1c);
-\draw [arrow] (child1c) -- (child12);
-\draw [arrow] (child2) -- (child2c);
-\draw [arrow] (child2c) -- (child2w);
-\draw [arrow] (child2w) -- (child22);
-\draw [arrow] (child3) -- (child3c);
-\draw [arrow] (child3c) -- (child3w);
-\draw [arrow] (child3w) -- (child32);
+\draw [arrow] (child1) -- (child12);
+\draw [arrow] (child3) -- (child32);
 \draw [thick,dashed,->] (child12.east) -- ($(child22.west)+(-0.4,0)$);
 \draw [thick,dashed,->] (child22.east) -- ($(child32.west)+(-0.4,0)$);
 

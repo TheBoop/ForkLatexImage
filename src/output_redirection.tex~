@@ -45,7 +45,7 @@ open(file)
 \node(dup)[child,below=1cm of open]
 {
     \begin{lstlisting}
-dup2(fd,1)
+dup2(file,1)
     \end{lstlisting}
 };
 
