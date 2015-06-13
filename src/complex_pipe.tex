@@ -28,17 +28,22 @@
 \begin{tikzpicture}
 
 
-\node(fork1)at (-4,0)[parent]{
+\node(fork1)at (-5,0)[parent]{
 \begin{lstlisting}
 int pid=fork
 \end{lstlisting}
 };
-\node(fork2)at (2,0)[parent]{
+\node(fork2)at (-1,0)[parent]{
 \begin{lstlisting}
 int pid=fork
 \end{lstlisting}
 };
-\node(wait)at (7,0)[parent]{
+\node(wait1)at (3,0)[parent]{
+\begin{lstlisting}
+wait()
+\end{lstlisting}
+};
+\node(wait2)at (7,0)[parent]{
 \begin{lstlisting}
 wait()
 \end{lstlisting}
@@ -197,15 +202,17 @@ execvp(arg[0],args);
 \draw[vecArrow] (d2) to (e2);
 \draw[vecArrow] (a) to (b);
 \draw[vecArrow] (b) to (fork1);
-\draw[vecArrow] (fork1) to (c1);
+\draw[vecArrow] (fork1.south) to ($(c1.north)+(0,0.1)$);
 \draw[vecArrow] (fork1) to (fork2);
-\draw[vecArrow] (fork2) to (c2);
-\draw[vecArrow] (fork2) to (wait.west);
+\draw[vecArrow] (fork2.south) -- ($(c2.north)+(0,0.2)$);
+\draw[vecArrow] (fork2) to (wait1.west);
 \draw[vecArrow] (e1) to (execvp1);
 \draw[vecArrow] (e2) to (execvp2);
-\draw[vecArrow] (wait.east) to ($(wait.east)+(1,0)$);
+\draw[vecArrow] (wait2.east) to ($(wait2.east)+(1,0)$);
 \draw[thick,dashed,->] (execvp1) -- (execvp2);
+\draw[vecArrow] (wait1) to (wait2);
 
+%Titles
 \node(parent1d) [left=of fork1,font=\large]{\textbf{PARENT}};
 \node(child1d) [below=0.5cm and -1cm of execvp1,font=\large]{\textbf{CHILD1}};
 \node(child2d) [below=0.5cm and -1cm of execvp2,font=\large]{\textbf{CHILD2}};
@@ -220,10 +227,10 @@ execvp(arg[0],args);
     ($(c2.north west)+(-0.3,0.3)$)  rectangle ($(execvp2.south east)+(3.5,-1.5)$);
     %Parent1
     \path[fill=green!20,rounded corners]
-    ($(fd.north west)+(-0.3,0.8)$)  rectangle ($(fork1.south east)+(1,-0.4)$);
+    ($(fd.north west)+(-0.3,0.8)$)  rectangle ($(fork1.south east)+(1.3,-0.4)$);
     %Parent2
     \path[fill=green!20,rounded corners]
-    ($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait.south east)+(1.5,-0.4)$);
+    ($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait2.south east)+(1,-0.4)$);
 \end{pgfonlayer}
 
 \end{tikzpicture}
