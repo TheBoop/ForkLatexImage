@@ -67,7 +67,7 @@ execvp
 \begin{scope}[auto, every node/.style={draw,rectangle,minimum height=1.5cm,minimum width=6cm,inner sep=1,fill=white}]
 \node[below= .6cm of execvp.south] (table) {
 		\begin{tabular}{r r | >{\centering\arraybackslash}p{1.7cm}  | l}\cline{3-3}
-			file  $\rightarrow$ & 0 & newfile & $\rightarrow$ file\\\cline{3-3}
+			file  $\rightarrow$ & 0 & fd & $\rightarrow$ file\\\cline{3-3}
 			& 1 & out& $\rightarrow$ tty (display) \\\cline{3-3}
 			& 2 & err & $\rightarrow$ tty (display) \\\cline{3-3}
 		\end{tabular}
