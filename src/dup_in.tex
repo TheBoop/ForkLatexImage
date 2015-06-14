@@ -52,7 +52,7 @@
 	\node[below= 1cm of b.south] (c) {
 		\hspace{-.3cm}
 		\begin{tabular}{r r | >{\centering\arraybackslash}p{1.7cm}  | l}\cline{3-3}
-			\sout{tty (keyboard)} file $\rightarrow$ & 0 & \sout{in} newfile & $\rightarrow$ file\\\cline{3-3}
+			\sout{tty (keyboard)} file $\rightarrow$ & 0 & \sout{in} fd & $\rightarrow$ file\\\cline{3-3}
 			& 1 & out & $\rightarrow$ tty (display) \\\cline{3-3}
 			& 2 & err & $\rightarrow$ tty (display) \\\cline{3-3}
 			file $\rightarrow$ & 3 & fd & $\rightarrow$ file \\\cline{3-3}
@@ -61,7 +61,7 @@
 	\node[below= 1cm of c.south] (d) {
 		\hspace{2cm}
 		\begin{tabular}{r r | >{\centering\arraybackslash}p{1.7cm}  | l}\cline{3-3}
-			file  $\rightarrow$ & 0 & newfile & $\rightarrow$ file\\\cline{3-3}
+			file  $\rightarrow$ & 0 & fd & $\rightarrow$ file\\\cline{3-3}
 			& 1 & out& $\rightarrow$ tty (display) \\\cline{3-3}
 			& 2 & err & $\rightarrow$ tty (display) \\\cline{3-3}
 			\sout{file} $\rightarrow$ & 3 & \sout{fd} & $\rightarrow$ \sout{file} \\\cline{3-3}

@@ -13,8 +13,7 @@
 \usetikzlibrary{arrows, decorations.markings}
 \usetikzlibrary{positioning}
 
-\usetikzlibrary{arrows, decorations.markings, shapes.geometric, backgrounds, calc}
-\usetikzlibrary{positioning}
+\lstset{upquote=true}
 
 \tikzstyle{parent} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, draw=black, thick, fill=yellow!40]
 \tikzstyle{code} = [rectangle, rounded corners, minimum width=4cm, minimum height=1.25cm, text centered, draw=black, thick, fill=yellow!40]
@@ -33,6 +32,7 @@
 	\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=10cm,inner sep=1,fill=white}]
 
 	\node(a) {
+		\hspace{.4cm}
 		\begin{tabular}{r r | >{\centering\arraybackslash}p{1.7cm}  | l}\cline{3-3}
 			tty (keyboard) $\rightarrow$ & 0 & in & \\\cline{3-3}
 			& 1 & out & $\rightarrow$  tty (display) \\\cline{3-3}
@@ -40,6 +40,7 @@
 		\end{tabular}
 	};
 	\node[below= 1cm of a.south] (b) { 
+		\hspace{.35cm}
 		\begin{tabular}{r r | >{\centering\arraybackslash}p{1.7cm}  | l}\cline{3-3}
 			tty (keyboard) $\rightarrow$ & 0 & in & \\\cline{3-3}
 			& 1 & out & $\rightarrow$  tty (display) \\\cline{3-3}
@@ -49,18 +50,19 @@
 	};
 	
 	\node[below= 1cm of b.south] (c) {
-		\hspace{.4cm}
+		\hspace{-.3cm}
 		\begin{tabular}{r r | >{\centering\arraybackslash}p{1.7cm}  | l}\cline{3-3}
-			tty (keyboard) $\rightarrow$ & 0 & in & \\\cline{3-3}
-			file $\rightarrow$ & 1 & \sout{out} fd & $\rightarrow$ \sout{tty (display)} file \\\cline{3-3}
-			& 2 & err & $\rightarrow$ \ tty (display) \\\cline{3-3}
+			\sout{tty (keyboard)} file $\rightarrow$ & 0 & \sout{in} newfile & $\rightarrow$ file\\\cline{3-3}
+			& 1 & out & $\rightarrow$ tty (display) \\\cline{3-3}
+			& 2 & err & $\rightarrow$ tty (display) \\\cline{3-3}
 			file $\rightarrow$ & 3 & fd & $\rightarrow$ file \\\cline{3-3}
 		\end{tabular}
 	};
 	\node[below= 1cm of c.south] (d) {
+		\hspace{2cm}
 		\begin{tabular}{r r | >{\centering\arraybackslash}p{1.7cm}  | l}\cline{3-3}
-			tty (keyboard) $\rightarrow$ & 0 & in & \\\cline{3-3}
-			file $\rightarrow$ & 1 & fd & $\rightarrow$ file \\\cline{3-3}
+			file  $\rightarrow$ & 0 & newfile & $\rightarrow$ file\\\cline{3-3}
+			& 1 & out& $\rightarrow$ tty (display) \\\cline{3-3}
 			& 2 & err & $\rightarrow$ tty (display) \\\cline{3-3}
 			\sout{file} $\rightarrow$ & 3 & \sout{fd} & $\rightarrow$ \sout{file} \\\cline{3-3}
 		\end{tabular}
@@ -71,9 +73,9 @@
 int fd = open("file"); 
 		\end{lstlisting}
 		};
-	\node[draw,left= 1cm of c.west, code] (y) {
+	\node[draw,left= 1cm of c.west,code] (y) {
 		\begin{lstlisting} 
-dup2(fd,1); 
+dup2(fd,0); 
 		\end{lstlisting}
 		};
 	\node[draw, left= 1cm of d.west, code] (z) {
