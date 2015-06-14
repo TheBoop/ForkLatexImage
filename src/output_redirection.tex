@@ -1,6 +1,16 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{tikz,listings, soul}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{nopageno}
+\usepackage{array,multirow}
+\usepackage[normalem]{ulem}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{array,multirow}
 \usetikzlibrary{shapes.geometric, arrows, positioning, backgrounds, calc, decorations.markings}
 
 \begin{document}
@@ -55,18 +65,28 @@ dup2(fd,1)
 execvp
     \end{lstlisting}
 };
+\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=1.5cm,minimum width=6cm,inner sep=1,fill=white}]
+\node[below= 1cm of execvp.south] (table) {
+		\begin{tabular}{r r | >{\centering\arraybackslash}p{1.7cm}  | l}\cline{3-3}
+			tty (keyboard) $\rightarrow$ & 0 & in & \\\cline{3-3}
+			file $\rightarrow$ & 1 & newfile & $\rightarrow$ file \\\cline{3-3}
+			& 2 & err & $\rightarrow$ tty (display) \\\cline{3-3}
+		\end{tabular}
+	};
+\end{scope}
 
 \node(child1d) [above=0.2cm of open]{CHILD};
 \node(parent1d) [above=0.2cm of fork1]{PARENT};
 
+
+
 %Back Ground Outline
 \begin{pgfonlayer}{background}
 \path[fill=blue!20,rounded corners]
-($(open.north west)+(-0.3,1)$)  rectangle ($(execvp.south east)+(0.3,-0.4)$);
+($(open.north west)+(-3.2,1)$)  rectangle ($(table.south east)+(0.3,-0.4)$);
 \path[fill=green!20,rounded corners]
-($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait.south east)+(0.3,-0.4)$);
+($(fork1.north west)+(-3.2,1)$)  rectangle ($(wait.south east)+(0.3,-0.4)$);
 \end{pgfonlayer}
-
 \draw [vecArrow] (wait) -- ($(wait.east)+(2,0)$);
 \draw [vecArrow] (fork1) -- ($(open.north)+(0,1)$);
 \draw [vecArrow] (fork1) -- (wait);
