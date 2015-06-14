@@ -2,23 +2,31 @@
 By David Ding(TheBoop) and Jerome Barbero(jbarb011)
 
 Latex generated images for dupe, pipe, and forks. Including a very simple Legend.
-
+##Legend
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/legend_.png)
 
+##Single Fork
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/singlefork.png)
 
+##Multiple Forks
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/MultipleForks.png)
 
+##Dup In
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/DupIn.png)
 
+##Dup Out
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/DupOut.png)
 
+##Input Redirection
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/InputRedirection.png)
 
+#Output Redirection
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/OutputRedirection.png)
 
+##Multiple Forks with Piping
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/MultipleForkswithPiping.png)
 
+##Piping
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/Piping.png)
 
 
@@ -39,3 +47,12 @@ make all
 The command will create two folders, bin and left_overs.
 
 bin will contain the pdf files and left_overs will contain the log, aux, dvi, and ps files.
+
+If you want png files you will need to do it manually with a combination of ImageMagick and Gimp.
+
+To compile pdfs to pngs run the commands:
+
+```
+cd bin
+convert *.pdf *png
+```
