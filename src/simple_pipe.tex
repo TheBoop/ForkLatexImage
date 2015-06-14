@@ -150,6 +150,7 @@ execvp
 };
 
 %Tables
+\begin{scope}[auto, every node/.style={draw,rectangle,minimum height=2cm,minimum width=4.4cm,inner sep=1,fill=white}]
 \node (table1)[below= 1cm of child12] {
 \begin{tabular}{r | >{\centering\arraybackslash}p{1.1cm}  | l}\cline{2-2}
 key $\rightarrow$ & in & \\\cline{2-2}
@@ -171,21 +172,27 @@ child2 $\rightarrow$ & in & \\\cline{2-2}
 & err & $\rightarrow$ disp \\\cline{2-2}
 \end{tabular}
 };	
+\end{scope}
 
 \node(child1d) [above=0.2cm of child1]{CHILD1};
-\node(child1d) [above=0.2cm of child2]{CHILD2};
-\node(child1d) [above=0.2cm of child3]{CHILD3};
+\node(child2d) [above=0.2cm of child2]{CHILD2};
+\node(child3d) [above=0.2cm of child3]{CHILD3};
 \node(parent1d) [above=1cm of fork3, xshift = -2cm]{ PARENT};
+\node(table1d) [below= 0.5cm of child12]{CHILD1};
+\node(table2d) [below= 0.5cm of child22]{CHILD2};
+\node(table3d) [below= 0.5cm of child32]{CHILD3};
 
 %Back Ground Outline
 \begin{pgfonlayer}{background}
 %Child
 \path[fill=blue!20,rounded corners]
-($(child1.north west)+(-0.3,1)$)  rectangle ($(table1.south east)+(0.3,-0.4)$);
+($(child1.north west)+(-0.3,1)$)  rectangle ($(child12.south east)+(0.3,-1)$);
 \path[fill=blue!20,rounded corners]
-($(child2.north west)+(-0.3,1)$)  rectangle ($(table2.south east)+(0.3,-0.4)$);
+($(child2.north west)+(-0.3,1)$)  rectangle ($(child22.south east)+(0.3,-1)$);
 \path[fill=blue!20,rounded corners]
-($(child3.north west)+(-0.3,1)$)  rectangle ($(table3.south east)+(0.3,-0.4)$);
+($(child3.north west)+(-0.3,1)$)  rectangle ($(child32.south east)+(0.3,-1)$);
+\path[fill=blue!20,rounded corners]
+($(table1.north west)+(-0.3,0.4)$)  rectangle ($(table3.south east)+(0.3,-0.4)$);
 %Parent
 \path[fill=green!20,rounded corners]
 ($(pipe.north west)+(-0.6,.8)$)  rectangle ($(wait1.south east)+(0.3,-0.4)$);
