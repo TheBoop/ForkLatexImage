@@ -25,9 +25,9 @@
 \node(parent) [right= 2.5cm of code.east] {PARENT};
 \node(child) [below=1.5cm of parent.south] {CHILD};
 \begin{pgfonlayer}{background}
-\path[fill=blue!20,rounded corners, thick ,draw=black!50, dashed]
+\path[fill=blue!20,rounded corners]
 ($(child.north west)+(-.5,.5)$)  rectangle ($(child.south east)+(.5,-.5)$);
-\path[fill=green!20,rounded corners, thick ,draw=black!50, dashed]
+\path[fill=green!20,rounded corners]
 ($(parent.north west)+(-.5,.5)$)  rectangle ($(parent.south east)+(.5,-.5)$);
 \end{pgfonlayer}
 

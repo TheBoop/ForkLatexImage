@@ -60,18 +60,20 @@ execvp
 
 %Back Ground Outline
 \begin{pgfonlayer}{background}
-\path[fill=blue!20,rounded corners, thick ,draw=black!50, dashed]
+\path[fill=blue!20,rounded corners]
 ($(open.north west)+(-0.3,1)$)  rectangle ($(execvp.south east)+(0.3,-0.4)$);
-\path[fill=green!20,rounded corners, thick ,draw=black!50, dashed]
+\path[fill=green!20,rounded corners]
 ($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait.south east)+(0.3,-0.4)$);
 \end{pgfonlayer}
 
+%Arrows
 \draw [vecArrow] (fork1) -- ($(open.north)+(0,1)$);
 \draw [vecArrow] (fork1) -- (wait);
 \draw [vecArrow] (wait) -- ($(wait.east)+(2,0)$);
 \draw [vecArrow] (open) -- (dup);
 \draw [vecArrow] (dup) -- (execvp);
-\draw[thick,dashed,->] ($(execvp.west)+(-2,0)$) -- ($(execvp.west)$) node[midway,above]{\textbf{file}};
+\draw [thick,dashed,->] ($(execvp.west)+(-2,0)$) -- ($(execvp.west)$) node[midway,above]{\textbf{file}};
+\draw [vecArrow] ($(fork1.north)+(0,2)$) to ($(fork1.north)+(0,1)$);
 
 \end{tikzpicture}
 

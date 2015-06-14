@@ -61,9 +61,9 @@ execvp
 
 %Back Ground Outline
 \begin{pgfonlayer}{background}
-\path[fill=blue!20,rounded corners, thick ,draw=black!50, dashed]
+\path[fill=blue!20,rounded corners]
 ($(open.north west)+(-0.3,1)$)  rectangle ($(execvp.south east)+(0.3,-0.4)$);
-\path[fill=green!20,rounded corners, thick ,draw=black!50, dashed]
+\path[fill=green!20,rounded corners]
 ($(fork1.north west)+(-0.3,1)$)  rectangle ($(wait.south east)+(0.3,-0.4)$);
 \end{pgfonlayer}
 
@@ -72,6 +72,7 @@ execvp
 \draw [vecArrow] (fork1) -- (wait);
 \draw [vecArrow] (open) -- (dup);
 \draw [vecArrow] (dup) -- (execvp);
+\draw [vecArrow] ($(fork1.north)+(0,2)$) -- ($(fork1.north)+(0,1)$);
 \draw[thick,dashed,->] ($(execvp.east)+(0.3,0)$) -- ($(execvp.east)+(2,0)$) node[midway,above]{\textbf{file}};
 
 

@@ -47,12 +47,27 @@ int pid3 = fork()
 \end{lstlisting}
 };
 
-\node(wait) at (10,-3)[parent]{
+\node(wait1) at (10,-3)[parent]{
 \begin{lstlisting}
 wait()
 \end{lstlisting}
 };
 
+\node(wait2) at (10,-5)[child]
+{
+\begin{lstlisting}
+wait()
+\end{lstlisting}
+};
+
+\node(wait3) at (10,-7)[child]
+{
+\begin{lstlisting}
+wait()
+\end{lstlisting}
+};
+
+%Level1
 \node(child1) at (-5,-6)[child]
 {
 \begin{lstlisting}
@@ -75,6 +90,7 @@ dup2(fd[2],0)
 \end{lstlisting}
 };
 
+%Level 2
 \node(child1c) at (-5,-8)[child]
 {
 \begin{lstlisting}
@@ -101,6 +117,7 @@ close(fd[3]);
 \end{lstlisting}
 };
 
+%Level3
 \node(child12) at (-5,-10)[child]
 {
 \begin{lstlisting}
@@ -108,28 +125,14 @@ execvp
 \end{lstlisting}
 };
 
-\node(child2w) at (0,-10)[child]
-{
-\begin{lstlisting}
-wait()
-\end{lstlisting}
-};
-
-\node(child22) at (-0,-12)[child]
+\node(child22) at (-0,-10)[child]
 {
 \begin{lstlisting}
 execvp
 \end{lstlisting}
 };
 
-\node(child3w) at (5,-10)[child]
-{
-\begin{lstlisting}
-wait()
-\end{lstlisting}
-};
-
-\node(child32) at (5,-12)[child]
+\node(child32) at (5,-10)[child]
 {
 \begin{lstlisting}
 execvp
@@ -143,16 +146,22 @@ execvp
 
 %Back Ground Outline
 \begin{pgfonlayer}{background}
-\path[fill=blue!20,rounded corners, thick ,draw=black!50, dashed]
+%Child
+\path[fill=blue!20,rounded corners]
 ($(child1.north west)+(-0.3,1)$)  rectangle ($(child12.south east)+(0.3,-0.4)$);
-\path[fill=blue!20,rounded corners, thick ,draw=black!50, dashed]
+\path[fill=blue!20,rounded corners]
 ($(child2.north west)+(-0.3,1)$)  rectangle ($(child22.south east)+(0.3,-0.4)$);
-\path[fill=blue!20,rounded corners, thick ,draw=black!50, dashed]
+\path[fill=blue!20,rounded corners]
 ($(child3.north west)+(-0.3,1)$)  rectangle ($(child32.south east)+(0.3,-0.4)$);
-\path[fill=green!20,rounded corners, thick ,draw=black!50, dashed]
-($(pipe.north west)+(-0.6,.8)$)  rectangle ($(wait.south east)+(0.3,-0.4)$);
+%Parent
+\path[fill=green!20,rounded corners]
+($(pipe.north west)+(-0.6,.8)$)  rectangle ($(wait1.south east)+(0.3,-0.4)$);
+\path[fill=green!20,rounded corners]
+($(wait1.north west)+(-0.6,.8)$)  rectangle ($(wait3.south east)+(0.3,-0.4)$);
+
 \end{pgfonlayer}
 
+%Arrows
 \draw [arrow] ($(pipe.north)+(0,.5)$) -- (pipe.north);
 \draw [arrow] (pipe) -- (fork1);
 \draw [arrow] (fork1) -- ($(child1.north)+(0,1)$);
@@ -160,16 +169,17 @@ execvp
 \draw [arrow] (fork3) -- ($(child3.north)+(0,1)$);
 \draw [arrow] (fork1) -- (fork2);
 \draw [arrow] (fork2) -- (fork3);
-\draw [arrow] (fork3) -- (wait);
-\draw [arrow] (wait.east) -- ($(wait.east)+(1,0)$);
+\draw [arrow] (fork3) -- (wait1);
+\draw [arrow] (wait1) -- (wait2);
+\draw [arrow] (wait2) -- (wait3);
+\draw [arrow] (wait3.east) -- ($(wait3.east)+(1,0)$);
 \draw [arrow] (child1) -- (child1c);
 \draw [arrow] (child1c) -- (child12);
 \draw [arrow] (child2) -- (child2c);
-\draw [arrow] (child2c) -- (child2w);
-\draw [arrow] (child2w) -- (child22);
 \draw [arrow] (child3) -- (child3c);
-\draw [arrow] (child3c) -- (child3w);
-\draw [arrow] (child3w) -- (child32);
+\draw [arrow] (child3c) -- (child32);
+\draw [arrow] (child2c) -- (child22);
+
 \draw [thick,dashed,->] (child12.east) -- ($(child22.west)+(-0.4,0)$);
 \draw [thick,dashed,->] (child22.east) -- ($(child32.west)+(-0.4,0)$);
 
