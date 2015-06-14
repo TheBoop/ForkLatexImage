@@ -53,7 +53,8 @@ execvp
 
 \draw [arrow] (fork1) -- ($(child1.north)+(0,1)$);
 \draw [arrow] (fork1) -- (wait);
-
+\draw [arrow] ($(fork1.north)+(0,2)$) -- ($(fork1.north)+(0,1)$);
+\draw [arrow] (wait.east) -- ($(wait.east)+(1,0)$);
 
 \end{tikzpicture}
 
