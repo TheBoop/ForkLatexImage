@@ -2,35 +2,35 @@
 By David Ding(TheBoop) and Jerome Barbero(jbarb011)
 
 Latex generated images for dupe, pipe, and forks. Including a very simple Legend.
-##Legend
+###Legend
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/legend_.png)
 
-##Single Fork
+###Single Fork
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/singlefork.png)
 
-##Multiple Forks
+###Multiple Forks
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/MultipleForks.png)
 
-##Dup In
+###Dup In
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/DupIn.png)
 
-##Dup Out
+###Dup Out
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/DupOut.png)
 
-##Input Redirection
+###Input Redirection
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/InputRedirection.png)
 
-#Output Redirection
+###Output Redirection
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/OutputRedirection.png)
 
-##Multiple Forks with Piping
+###Multiple Forks with Piping
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/MultipleForkswithPiping.png)
 
-##Piping
+###Piping
 ![Pic](https://github.com/TheBoop/ForkLatexImage/blob/master/images/Piping.png)
 
 
-### Compiling images
+## Compiling images
 First make sure you have dvips, ps2pdf, latex and the full texlive set of packages installed. You can install them by running the command (This will take several minutes):
 ```
 sudo apt-get install texlive-full
