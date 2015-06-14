@@ -50,7 +50,7 @@ bin will contain the pdf files and left_overs will contain the log, aux, dvi, an
 
 If you want png files you will need to do it manually with a combination of ImageMagick and Gimp.
 
-To compile pdfs to pngs run the commands:
+To compile .pdf files to .png files run the commands:
 
 ```
 cd bin
